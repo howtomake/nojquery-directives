@@ -1,0 +1,11 @@
+<div class="select2-container"
+     ng-class="{'select2-container-active':opened, 'select2-dropdown-open':opened,'select2-container-disabled':disabled}">
+    <a href="javascript:void(0);" class="select2-choice" ng-click="dropDown()">
+        <span ng-class="{placeholder:!current.label&&placeholder}">{{current.label || placeholder}}</span>
+        <abbr ng-click="clear($event)" ng-show="showClear"></abbr>
+        <div>
+            <b></b>
+        </div>
+    </a>
+</div>
+<div ng-show="opened" class="select2-drop" ng-include="getTemplatePath()"></div>

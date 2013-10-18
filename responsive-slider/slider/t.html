@@ -1,0 +1,27 @@
+<div id="slide-wrapper" ng-mouseenter="mouseEnter()" ng-mouseleave="mouseLeave()">
+    <div class="oneByOne1">
+        <div class="oneByOne_item animate0" ng-class="fadeAnimate">
+            <a ng-href="{{current.image.link || 'javascript:void(0);'}}">
+                <img ng-src="{{current.image.src}}" alt="{{current.image.alt}}">
+            </a>
+            <div id="slide-desc">
+                <span class="slide5Txt1 animate1" ng-class="labelOneAnimate">
+                    {{current.oneLabel.text}}
+                </span>
+                <span class="slide5Txt2 animate2" ng-class="labelTwoAnimate">
+                    {{current.twoLabel.text}}
+                </span>
+            </div>
+        </div>
+        <div class="buttonArea animate0" ng-class="buttonsAnimate" ng-show="settings.showButton">
+            <div class="buttonCon" style="cursor: pointer;">
+                <a ng-repeat="b in banners" class="theButton" ng-class="{active:current.image.src==b.image.src}"
+                        ng-click="set($index)"></a>
+            </div>
+        </div>
+        <div class="arrowButton animate0" style="cursor: pointer;" ng-class="buttonsAnimate" ng-show="settings.showArrow">
+            <div class="prevArrow" ng-click="prev()"></div>
+            <div class="nextArrow" ng-click="next()"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+#slide-wrapper{
+    margin: 0 auto;
+    -webkit-user-select: none;
+}
+.oneByOne1{
+    background: #EFEFEF url(../img/paven.png) repeat;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+}
+.oneByOne_item img{
+    max-width: 100%;
+}
+#slide-desc{
+    position: absolute;
+    line-height: normal;
+    bottom: 10%;
+}
+.oneByOne_item span.slide5Txt1 {
+    position: relative;
+    font-size: 24px;
+    padding: 8px;
+    display: block;
+    color: white;
+    background: #E25A00;
+    float: left;
+}
+.oneByOne_item span.slide5Txt2 {
+    position: relative;
+    float: left;
+    clear: left;
+    padding: 8px;
+    font-size: 16px;
+    background: #292929;
+    color: white;
+    display: block;
+}
+.buttonArea {
+    float: left;
+    left: 50%;
+    position: relative;
+    top: 100%;
+    margin-top: -32px;
+    opacity: 0;
+}
+.buttonCon{
+    float: left;
+    left: -50%;
+    position: relative;
+    background: url('../img/transparant-10.png') top left repeat;
+    padding: 5px;
+    bottom:-5px;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+}
+.buttonCon .theButton {
+    display: block;
+    color: #B22222;
+    width: 20px;
+    height: 22px;
+    background: url(../img/circlebutton.png) no-repeat;
+    text-indent: -9999px;
+    border: 0;
+    margin-right: 3px;
+    float: left;
+}
+.buttonArea a.active {
+    background-position: 0 -22px;
+}
+.arrowButton{
+    opacity: 0;
+}
+.arrowButton .prevArrow {
+    background: url(../img/prev.png) no-repeat;
+    width: 40px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    left: 12px;
+}
+.arrowButton .nextArrow {
+    background: url(../img/next.png) no-repeat;
+    width: 40px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    right: 12px;
+}
+.animate0{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: 0s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: 0s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: 0s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.animate1{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: .2s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: .2s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: .2s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: .2s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.animate2{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: .4s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: .4s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: .4s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: .4s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.animate3{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: .6s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: .6s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: .6s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: .6s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.animate4{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: .8s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: .8s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: .8s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: .8s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.animate5{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: 1s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: 1s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+.animate6{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 1.2s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: 1.2s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: 1.2s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: 1.2s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+.animate7{
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 1.4s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-duration: .6s;
+    -moz-animation-delay: 1.4s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    -ms-animation-duration: .6s;
+    -ms-animation-delay: 1.4s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+    animation-duration: .6s;
+    animation-delay: 1.4s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}

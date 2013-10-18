@@ -1,0 +1,7 @@
+<ul class="select2-results">
+    <li ng-repeat="m in source" ng-click="setSelect(m)" ng-mouseenter="mouseEnter($event)" ng-mouseleave="mouseLeave($event)">
+        <div class="select2-result-label">
+            <span class="select2-match"></span>{{getLabel(m)}}
+        </div>
+    </li>
+</ul>

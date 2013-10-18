@@ -1,0 +1,14 @@
+<ul class="select2-results">
+    <li ng-repeat="(k, v) in groups" class="select2-result-with-children">
+        <div class="select2-result-label">
+            <span class="select2-match"></span>{{k}}
+        </div>
+        <ul class="select2-result-sub">
+            <li ng-repeat="m in v" ng-click="setSelect(m)" ng-mouseenter="mouseEnter($event)" ng-mouseleave="mouseLeave($event)">
+                <div class="select2-result-label">
+                    <span class="select2-match"></span>{{getLabel(m)}}
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>

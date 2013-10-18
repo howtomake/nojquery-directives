@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Responsive Slider for angular.js</title>
+  <link rel="stylesheet" href="css/slider.css"/>
+  <link rel="stylesheet" href="css/animate.min.css">
+</head>
+<body ng-switch data-on="show" ng-controller="MyCtrl1">
+<div id="slide-wrapper" ng-switch-when="true">
+    <div data-ta-slider data-banners="banners"></div>
+</div>	<!-- end slider -->
+<div ng-switch-default>
+    Слайдер уничтожен
+</div>
+<button ng-click="show=!show">Переключить</button>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="slider/slider.js"></script>
+</body>
+</html>

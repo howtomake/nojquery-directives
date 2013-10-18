@@ -1,0 +1,7 @@
+<div class="ui-slider ui-slider-horizontal">
+    <a class="ui-slider-handle" ng-style="{left: model[0]/len*100+'%'}"
+            ng-mousedown="mousedown($event,'startDown')"></a>
+    <a class="ui-slider-handle" ng-style="{left: model[1]/len*100+'%'}"
+            ng-mousedown="mousedown($event,'endDown')"></a>
+    <div class="ui-slider-range" ng-style="{left: model[0]/len*100+'%',width:(model[1]-model[0])/len*100+'%'}"></div>
+</div>

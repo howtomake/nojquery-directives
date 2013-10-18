@@ -1,0 +1,56 @@
+<ul class="select2-results">
+    <li ng-repeat="(k, v) in groups" class="select2-result-with-children">
+        <div class="select2-result-label">
+            <span class="select2-match"></span>{{k}}
+        </div>
+        <ul class="select2-result-sub">
+            <li ng-repeat="(k1, v1) in v" class="select2-result-with-children">
+                <div class="select2-result-label">
+                    <span class="select2-match"></span>{{k1}}
+                </div>
+                <ul class="select2-result-sub">
+                    <li ng-repeat="(k2, v2) in v1" class="select2-result-with-children">
+                        <div class="select2-result-label">
+                            <span class="select2-match"></span>{{k2}}
+                        </div>
+                        <ul class="select2-result-sub">
+                            <li ng-repeat="(k3,v3) in v2" class="select2-result-with-children">
+                                <div class="select2-result-label">
+                                    <span class="select2-match"></span>{{k3}}
+                                </div>
+                                <ul class="select2-result-sub">
+                                    <li ng-repeat="(k4,v4) in v3" class="select2-result-with-children">
+                                        <div class="select2-result-label">
+                                            <span class="select2-match"></span>{{k4}}
+                                        </div>
+                                        <ul class="select2-result-sub">
+                                            <li ng-repeat="(k5,v5) in v4" class="select2-result-with-children">
+                                                <div class="select2-result-label">
+                                                    <span class="select2-match"></span>{{k5}}
+                                                </div>
+                                                <ul class="select2-result-sub">
+                                                    <li ng-repeat="(k6,v6) in v5" class="select2-result-with-children">
+                                                        <div class="select2-result-label">
+                                                            <span class="select2-match"></span>{{k6}}
+                                                        </div>
+                                                        <ul class="select2-result-sub">
+                                                            <li ng-repeat="m in v6" ng-click="setSelect(m)" ng-mouseenter="mouseEnter($event)" ng-mouseleave="mouseLeave($event)">
+                                                                <div class="select2-result-label">
+                                                                    <span class="select2-match"></span>{{getLabel(m)}}
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

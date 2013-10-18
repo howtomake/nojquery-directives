@@ -1,0 +1,41 @@
+<div id="rg-gallery" class="rg-gallery" ng-show="photos.length">
+    <div class="rg-view">
+        <a href="javascript:void(0);" class="rg-view-full" ng-click="options.showThumbs=false"></a>
+        <a href="javascript:void(0);" class="rg-view-thumbs rg-view-selected" ng-click="options.showThumbs=true"></a>
+    </div>
+    <div class="rg-thumbs">
+        <!-- Elastislide Carousel Thumbnail Viewer -->
+        <div class="es-carousel-wrapper" ng-show="options.showThumbs">
+            <div class="es-nav">
+                <span id="es-nav-prev" ng-click="slidePrev()" ng-show="offsetL>0">Назад</span>
+                <span id="es-nav-next" ng-click="slideNext()" ng-show="offsetR>0">Вперед</span>
+            </div>
+            <div id="es-carousel" ng-style="{height: options.thumbPixelWidth+'px'}">
+                <ul style="display: block;" ng-style="{'margin-left':-offsetL+'px'}">
+                    <li ng-repeat="p in photos" ng-class="{selected:current.thumb==p.thumb}"
+                            ng-style="{width: options.thumbPixelWidth+'px'}">
+                        <a href="javascript:void(0);" style="border-width: 2px;" ng-click="set($index)">
+                            <img ng-src="{{p.thumb}}">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Elastislide Carousel Thumbnail Viewer -->
+    </div><!-- rg-thumbs -->
+    <div class="rg-image-wrapper">
+        <div class="rg-image-nav">
+            <a href="javascript:void(0);" ng-click="previous()" class="rg-image-nav-prev">Назад</a>
+            <a href="javascript:void(0);" ng-click="next()" class="rg-image-nav-next">Вперед</a>
+        </div>
+        <div class="rg-image">
+            <img ng-src="{{current.large}}">
+        </div>
+        <div class="rg-loading" style="display: none;"></div>
+        <div class="rg-caption-wrapper">
+            <div class="rg-caption" style="">
+                <p>{{current.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>

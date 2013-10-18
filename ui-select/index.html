@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>select for angular.js</title>
+    <link rel="stylesheet" href="css/select2.css"/>
+</head>
+<body ng-controller="MyCtrl">
+    <div style="width: 20%;">
+        Массив объектов с группировкой:
+        <div data-ta-select="{label:'$value.name', value:'$key',groups:['g']}" ng-model="params.select" data-source="options"></div>
+        Массив объектов с группировкой по двум полям:
+        <div data-ta-select="{label:'$value.id', value:'$key',groups:['g','name']}" ng-model="params.select" data-source="options"></div>
+        Массив объектов без группировки:
+        <div data-ta-select="{label:'$value.name', value:'$key'}" ng-model="params.select2" data-source="options" required
+                data-placeholder="select"></div>
+        Массив строк:
+        <div data-ta-select ng-model="params.select3" data-source="typesArray"></div>
+        Объект:
+        <div data-ta-select ng-model="params.select4" data-source="types"></div>
+    </div>
+    <div>{{params | json }}</div>
+    <button ng-click="change()">change</button>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="ta-select/ta-select.js"></script>
+</body>
+</html>
