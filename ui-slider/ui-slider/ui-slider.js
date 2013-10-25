@@ -34,15 +34,28 @@ angular.module('ta.uiSlider',[]).
                 }
                 scope.len = max-min;
 
+                var checkOnUndefined = function(){
+                    var start = 0,
+                        end = 1;
+                    if(hasObject){
+                        start = 'start';
+                        end = 'end';
+                    }
+                    if(scope.model[end]===min && scope.model[start]===min){
+                        scope.model = undefined;
+                    }
+                };
                 var mouseup = function(event){
                     if(angular.isNumber(scope.startDown) || angular.isNumber(scope.endDown)){
                         scope.startDown = scope.endDown = null;
                         if(hasObject){
-                            scope.model.start=Math.round(scope.model.start);
-                            scope.model.end=Math.round(scope.model.end);
+                            scope.model.start=Math.round(scope.current.start);
+                            scope.model.end=Math.round(scope.current.end);
+                            checkOnUndefined();
                         }else{
-                            scope.model[0]=Math.round(scope.model[0]);
-                            scope.model[1]=Math.round(scope.model[1]);
+                            scope.model[0]=Math.round(scope.current[0]);
+                            scope.model[1]=Math.round(scope.current[1]);
+                            checkOnUndefined()
                         }
                         scope.$digest();
                         if(event.preventDefault){
@@ -62,7 +75,7 @@ angular.module('ta.uiSlider',[]).
                         }
                         var dif = (event.clientX-scope[name])/ elm.find('div')[0].clientWidth* scope.len;
                         scope[name] = event.clientX;
-                        var nValue = scope.model[index]+dif;
+                        var nValue = scope.current[index]+dif;
                         if(nValue<min){
                             nValue = min;
                         }else if(nValue>max){
@@ -70,16 +83,19 @@ angular.module('ta.uiSlider',[]).
                         }
                         if(index===0 || index==='end'){
                             if(hasObject){
-                                scope.model[index]= nValue < scope.model.start ? scope.model.start : nValue;
+                                scope.current[index]= nValue < scope.current.start ? scope.current.start : nValue;
                             }else{
-                                scope.model[index]= nValue < scope.model[0] ? scope.model[0] : nValue;
+                                scope.current[index]= nValue < scope.current[0] ? scope.current[0] : nValue;
                             }
                         }else{
                             if(hasObject){
-                                scope.model[index]= nValue > scope.model.end ? scope.model.end : nValue;
+                                scope.current[index]= nValue > scope.current.end ? scope.current.end : nValue;
                             }else{
-                                scope.model[index]= nValue > scope.model[1] ? scope.model[1] : nValue;
+                                scope.current[index]= nValue > scope.current[1] ? scope.current[1] : nValue;
                             }
+                        }
+                        if(!scope.model){
+                            scope.model =scope.current;
                         }
                         if(event.preventDefault){
                             event.preventDefault();
@@ -105,13 +121,12 @@ angular.module('ta.uiSlider',[]).
                         $event.returnValue = false;
                     }
                 };
-
                 ngModel.$parsers.unshift(function(viewValue){
                     if(!viewValue){
                         if(hasObject){
-                            scope.model=viewValue = {start:min,end:max};
+                            scope.current=viewValue = {start:min,end:min};
                         }else{
-                            scope.model=viewValue = [min,max];
+                            scope.current=viewValue = [min,min];
                         }
                     }
                     var v;
@@ -120,7 +135,7 @@ angular.module('ta.uiSlider',[]).
                             viewValue.start=min;
                         }
                         if(angular.isUndefined(viewValue.end)){
-                            viewValue.end=max;
+                            viewValue.end=viewValue.start;
                         }
                         if(viewValue.start>viewValue.end){
                             v = viewValue.start;
@@ -133,12 +148,16 @@ angular.module('ta.uiSlider',[]).
                         if(viewValue.end>max){
                             viewValue.end=max;
                         }
+                        if(viewValue.start===min && viewValue.end === min){
+                            scope.model = undefined;
+                            return undefined;
+                        }
                     }else{
                         if(angular.isUndefined(viewValue[0])){
                             viewValue[0]=min;
                         }
                         if(angular.isUndefined(viewValue[1])){
-                            viewValue[1]=max;
+                            viewValue[1]=viewValue[0];
                         }
 
                         if(viewValue[0]>viewValue[1]){
@@ -152,11 +171,17 @@ angular.module('ta.uiSlider',[]).
                         if(viewValue[1]>max){
                             viewValue[1]=max;
                         }
+                        if(viewValue[0]===min && viewValue[1]===min){
+                            scope.model = undefined;
+                            return undefined;
+                        }
                     }
                     return viewValue;
                 });
+
                 scope.$watch('model',function(newValue){
-                     ngModel.$setViewValue(newValue);
+                    scope.current = newValue;
+                    ngModel.$setViewValue(newValue);
                 });
 
                 var destroy = function(){

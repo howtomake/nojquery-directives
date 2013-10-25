@@ -9,16 +9,16 @@ angular.module('myApp', ['ta.uiSlider']).
         $scope.setRange = function(){
             switch(i%4){
                 case 0:
-                    $scope.params.range = [50,25];
+                    $scope.params.range2 = {start:10};
                     break;
                 case 1:
-                    $scope.params.range = [10];
+                    $scope.params.range2 = {end:100};
                     break;
                 case 2:
-                    $scope.params.range = [10, 100];
+                    $scope.params.range2 = {start:10, end:100};
                     break;
                 case 3:
-                    delete $scope.params.range;
+                    delete $scope.params.range2;
                     break;
             }
             i++;

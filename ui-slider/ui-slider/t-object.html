@@ -1,7 +1,7 @@
 <div class="ui-slider ui-slider-horizontal">
-    <a class="ui-slider-handle" ng-style="{left: model.start/len*100+'%'}"
+    <a class="ui-slider-handle" ng-style="{left: current.start/len*100+'%'}"
        ng-mousedown="mousedown($event,'startDown')"></a>
-    <a class="ui-slider-handle" ng-style="{left: model.end/len*100+'%'}"
+    <a class="ui-slider-handle" ng-style="{left: current.end/len*100+'%'}"
        ng-mousedown="mousedown($event,'endDown')"></a>
-    <div class="ui-slider-range" ng-style="{left: model.start/len*100+'%',width:(model.end-model.start)/len*100+'%'}"></div>
+    <div class="ui-slider-range" ng-style="{left: current.start/len*100+'%',width:(current.end-current.start)/len*100+'%'}"></div>
 </div>
