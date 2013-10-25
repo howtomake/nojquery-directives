@@ -27,7 +27,9 @@ angular.module('ta.uiSlider',[]).
                 var min = Number(attrs.min) || 0,
                     max = Number(attrs.max) || 1000,
                     html = angular.element(document.getElementsByTagName('html')[0]),
-                    hasObject = options.hasObject;
+                    hasObject = options.hasObject,
+                    startKey = hasObject ? 'start' : 0,
+                    endKey = hasObject ? 'end' : 1;
 
                 if(min>max){
                     throw new Error('min > max');
@@ -35,28 +37,16 @@ angular.module('ta.uiSlider',[]).
                 scope.len = max-min;
 
                 var checkOnUndefined = function(){
-                    var start = 0,
-                        end = 1;
-                    if(hasObject){
-                        start = 'start';
-                        end = 'end';
-                    }
-                    if(scope.model[end]===min && scope.model[start]===min){
+                    if(scope.model[startKey]===min && scope.model[endKey]===min){
                         scope.model = undefined;
                     }
                 };
                 var mouseup = function(event){
                     if(angular.isNumber(scope.startDown) || angular.isNumber(scope.endDown)){
                         scope.startDown = scope.endDown = null;
-                        if(hasObject){
-                            scope.model.start=Math.round(scope.current.start);
-                            scope.model.end=Math.round(scope.current.end);
-                            checkOnUndefined();
-                        }else{
-                            scope.model[0]=Math.round(scope.current[0]);
-                            scope.model[1]=Math.round(scope.current[1]);
-                            checkOnUndefined()
-                        }
+                        scope.model[startKey]=Math.round(scope.current.start);
+                        scope.model[endKey]=Math.round(scope.current.end);
+                        checkOnUndefined();
                         scope.$digest();
                         if(event.preventDefault){
                             event.preventDefault();
@@ -68,11 +58,7 @@ angular.module('ta.uiSlider',[]).
                 var mousemove = function(event){
                     var process = function(name){
                         var index;
-                        if(hasObject){
-                            index = name==='startDown'?'start':'end';
-                        }else{
-                            index = name==='startDown'?0:1;
-                        }
+                        index = name==='startDown'?startKey:endKey;
                         var dif = (event.clientX-scope[name])/ elm.find('div')[0].clientWidth* scope.len;
                         scope[name] = event.clientX;
                         var nValue = scope.current[index]+dif;
@@ -82,17 +68,9 @@ angular.module('ta.uiSlider',[]).
                             nValue = max;
                         }
                         if(index===0 || index==='end'){
-                            if(hasObject){
-                                scope.current[index]= nValue < scope.current.start ? scope.current.start : nValue;
-                            }else{
-                                scope.current[index]= nValue < scope.current[0] ? scope.current[0] : nValue;
-                            }
+                            scope.current[index]= nValue < scope.current[startKey] ? scope.current[startKey] : nValue;
                         }else{
-                            if(hasObject){
-                                scope.current[index]= nValue > scope.current.end ? scope.current.end : nValue;
-                            }else{
-                                scope.current[index]= nValue > scope.current[1] ? scope.current[1] : nValue;
-                            }
+                            scope.current[index]= nValue > scope.current[endKey] ? scope.current[endKey] : nValue;
                         }
                         if(!scope.model){
                             scope.model =scope.current;
@@ -123,66 +101,85 @@ angular.module('ta.uiSlider',[]).
                 };
                 ngModel.$parsers.unshift(function(viewValue){
                     if(!viewValue){
-                        if(hasObject){
-                            scope.current=viewValue = {start:min,end:min};
-                        }else{
-                            scope.current=viewValue = [min,min];
-                        }
+                        scope.current=viewValue = hasObject ? {start:min,end:min} : [min,min];
                     }
-                    var v;
-                    if(hasObject){
-                        if(angular.isUndefined(viewValue.start)){
-                            viewValue.start=min;
-                        }
-                        if(angular.isUndefined(viewValue.end)){
-                            viewValue.end=viewValue.start;
-                        }
-                        if(viewValue.start>viewValue.end){
-                            v = viewValue.start;
-                            viewValue.start=viewValue.end;
-                            viewValue.end=v;
-                        }
-                        if(viewValue.start<min){
-                            viewValue.start=min;
-                        }
-                        if(viewValue.end>max){
-                            viewValue.end=max;
-                        }
-                        if(viewValue.start===min && viewValue.end === min){
-                            scope.model = undefined;
-                            return undefined;
-                        }
-                    }else{
-                        if(angular.isUndefined(viewValue[0])){
-                            viewValue[0]=min;
-                        }
-                        if(angular.isUndefined(viewValue[1])){
-                            viewValue[1]=viewValue[0];
-                        }
-
-                        if(viewValue[0]>viewValue[1]){
-                            v = viewValue[0];
-                            viewValue[0]=viewValue[1];
-                            viewValue[1]=v;
-                        }
-                        if(viewValue[0]<min){
-                            viewValue[0]=min;
-                        }
-                        if(viewValue[1]>max){
-                            viewValue[1]=max;
-                        }
-                        if(viewValue[0]===min && viewValue[1]===min){
-                            scope.model = undefined;
-                            return undefined;
-                        }
+                    checkNewValue(viewValue);
+                    if(viewValue[startKey]===min && viewValue[endKey] === min){
+                        scope.model = undefined;
+                        return undefined;
                     }
                     return viewValue;
                 });
 
+                var checkNewValue = function(newValue){
+                    if(!newValue){return;}
+                    var v;
+                    if(angular.isUndefined(newValue[startKey])){
+                        newValue[startKey]=min;
+                    }
+                    if(angular.isUndefined(newValue[endKey])){
+                        newValue[endKey]=newValue[startKey];
+                    }
+                    if(newValue[startKey]>newValue[endKey]){
+                        v = newValue[startKey];
+                        newValue[startKey]=newValue[endKey];
+                        newValue[endKey]=v;
+                    }
+                    if(newValue[startKey]<min){
+                        newValue[startKey]=min;
+                    }
+                    if(newValue[endKey]>max){
+                        newValue[endKey]=max;
+                    }
+                };
                 scope.$watch('model',function(newValue){
+                    checkNewValue(newValue);
                     scope.current = newValue;
                     ngModel.$setViewValue(newValue);
                 });
+                var changeRange = function(newValue, key){
+                    if(angular.isNumber(newValue)){
+                        var value = newValue;
+                        if(value<min){
+                            value = min;
+                        }
+                        if(value>max){
+                            value = max;
+                        }
+                        if(key === startKey && value > scope.model[endKey]){
+                            scope.model[endKey] = value;
+                        }else if(key === endKey && value < scope.model[startKey]){
+                            scope.model[startKey] = value;
+                        }
+                        scope.model[key] = value;
+                        if(scope.model[startKey]===min && scope.model[endKey]===min){
+                            delete scope.model;
+                        }
+                    }else{
+                        if(scope.model){
+                            if(newValue == scope.model[key===startKey ? endKey : startKey]){
+                                scope.model = undefined;
+                            }else{
+                                delete scope.model[key];
+                                scope.current[key] = min;
+                            }
+                        }
+                    }
+                };
+                var changeStart = function(newValue){
+                    changeRange(newValue, startKey);
+                };
+                var changeEnd = function(newValue){
+                    changeRange(newValue, endKey);
+                };
+                if(hasObject){
+                    scope.$watch('model["'+startKey + '"]',changeStart);
+                    scope.$watch('model["'+endKey + '"]',changeEnd);
+                }else{
+                    scope.$watch('model['+startKey + ']',changeStart);
+                    scope.$watch('model['+endKey + ']',changeEnd);
+                }
+
 
                 var destroy = function(){
                     elm.unbind('$destroy',destroy);
