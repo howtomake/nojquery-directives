@@ -5,6 +5,7 @@
  * Time: 8:10
  * To change this template use File | Settings | File Templates.
  */
+//todo: если уезжаем до конца вправо, тогда слайдер блокируется, т.к. метка назад, находится под вперед
 angular.module('ta.uiSlider',[]).
     value('taUiSliderOptions',{
         hasObject:true, //переводит слайдеры в режим отображения значений в объектах
@@ -30,7 +31,7 @@ angular.module('ta.uiSlider',[]).
                     hasObject = options.hasObject,
                     startKey = hasObject ? 'start' : 0,
                     endKey = hasObject ? 'end' : 1;
-
+                scope.min = min;
                 if(min>max){
                     throw new Error('min > max');
                 }
@@ -44,8 +45,8 @@ angular.module('ta.uiSlider',[]).
                 var mouseup = function(event){
                     if(angular.isNumber(scope.startDown) || angular.isNumber(scope.endDown)){
                         scope.startDown = scope.endDown = null;
-                        scope.model[startKey]=Math.round(scope.current.start);
-                        scope.model[endKey]=Math.round(scope.current.end);
+                        scope.model[startKey]=Math.round(scope.current[startKey]);
+                        scope.model[endKey]=Math.round(scope.current[endKey]);
                         checkOnUndefined();
                         scope.$digest();
                         if(event.preventDefault){
