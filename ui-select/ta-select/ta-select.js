@@ -90,7 +90,8 @@ angular.module('ta.select',[]).
             require:'ngModel',
             link:function(scope,elm,attrs,ngModel){
                 elm.css({
-                    position:'relative'
+                    position:'relative',
+                    float:'left'
                 });
                 var options = angular.extend({}, defaultOptions, scope.$eval(attrs.taSelect));
                 //возможны варианты использования в качестве источника массива строк, массива объектов, объекта
