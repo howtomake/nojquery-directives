@@ -47,9 +47,11 @@ angular.module('ta.uiSlider',[]).
                     console.log('mouseup', event.clientX);
                     if(angular.isNumber(scope.startDown) || angular.isNumber(scope.endDown)){
                         scope.startDown = scope.endDown = null;
-                        scope.model[startKey]=Math.round(scope.current[startKey]);
-                        scope.model[endKey]=Math.round(scope.current[endKey]);
-                        checkOnUndefined();
+                        if(scope.model){
+                            scope.model[startKey]=Math.round(scope.current[startKey]);
+                            scope.model[endKey]=Math.round(scope.current[endKey]);
+                            checkOnUndefined();
+                        }
                         scope.$digest();
                         if(event.preventDefault){
                             event.preventDefault();
