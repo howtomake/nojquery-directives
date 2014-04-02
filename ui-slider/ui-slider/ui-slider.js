@@ -217,6 +217,7 @@ angular.module('ta.uiSlider',[]).
                         scope.current=scope.hasObject ? {start:min,end:min} : [min,min];
                         scope.current[endKey]=nValue;
                     }
+                    scope.model=scope.current;
                 };
             }
         }
