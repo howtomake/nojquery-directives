@@ -203,8 +203,10 @@ angular.module('ta.uiSlider',[]).
                     while(!uiSlider.hasClass('ui-slider')){
                         uiSlider = uiSlider.parent();
                     }
-                    console.log('click',event.clientX, uiSlider[0].offsetLeft, uiSlider[0].clientWidth);
-                    var nValue =min +  Math.round((max-min)*(event.clientX-uiSlider[0].offsetLeft)/uiSlider[0].clientWidth);
+                    var rect = uiSlider[0].getBoundingClientRect();
+
+                    console.log('click',event.clientX, rect.left, uiSlider[0].clientWidth);
+                    var nValue =min +  Math.round((max-min)*(event.clientX-rect.left)/uiSlider[0].clientWidth);
                     if(scope.current){
                         if(nValue<scope.current[startKey]){
                             scope.current[startKey]=nValue;
