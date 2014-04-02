@@ -7,7 +7,7 @@
 </head>
 <body ng-controller="MyCtrl">
     <!--<div ta-ui-slider ng-model="params.range"></div>-->
-    <div data-ta-ui-slider min="1990" max="2020" ng-model="params.range"></div>
+    <div style="width: 500px;padding-left: 300px;" data-ta-ui-slider min="1990" max="2020" ng-model="params.range"></div>
     <div>{{params | json}}</div>
     <button ng-click="setRange()">Поменять</button>
     <script src="../bower_components/angular/angular.js"></script>

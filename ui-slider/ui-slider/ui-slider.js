@@ -42,7 +42,9 @@ angular.module('ta.uiSlider',[]).
                         scope.model = undefined;
                     }
                 };
+                var mouseDownX = 0;
                 var mouseup = function(event){
+                    console.log('mouseup', event.clientX);
                     if(angular.isNumber(scope.startDown) || angular.isNumber(scope.endDown)){
                         scope.startDown = scope.endDown = null;
                         scope.model[startKey]=Math.round(scope.current[startKey]);
@@ -56,6 +58,7 @@ angular.module('ta.uiSlider',[]).
                         }
                     }
                 };
+
                 var mousemove = function(event){
                     var process = function(name){
                         var index;
@@ -93,6 +96,8 @@ angular.module('ta.uiSlider',[]).
                 html.bind('mouseup',mouseup);
                 html.bind('mousemove',mousemove);
                 scope.mousedown = function($event, name){
+                    console.log('mousedown', $event.clientX);
+                    mouseDownX = $event.clientX;
                     scope[name]=$event.clientX;
                     if($event.preventDefault){
                         $event.preventDefault();
@@ -188,6 +193,29 @@ angular.module('ta.uiSlider',[]).
                     html.unbind('mousemove',mousemove);
                 };
                 elm.bind('$destroy',destroy);
+                scope.sliderClick=function(event){
+                    console.log('click', event.clientX);
+                    if(mouseDownX!==event.clientX && mouseDownX!==0){
+                        mouseDownX = 0;
+                        return;
+                    }
+                    var uiSlider = angular.element(event.target);
+                    while(!uiSlider.hasClass('ui-slider')){
+                        uiSlider = uiSlider.parent();
+                    }
+                    console.log('click',event.clientX, uiSlider[0].offsetLeft, uiSlider[0].clientWidth);
+                    var nValue =min +  Math.round((max-min)*(event.clientX-uiSlider[0].offsetLeft)/uiSlider[0].clientWidth);
+                    if(scope.current){
+                        if(nValue<scope.current[startKey]){
+                            scope.current[startKey]=nValue;
+                        }else{
+                            scope.current[endKey]=nValue;
+                        }
+                    }else{
+                        scope.current=scope.hasObject ? {start:min,end:min} : [min,min];
+                        scope.current[endKey]=nValue;
+                    }
+                };
             }
         }
     }]);

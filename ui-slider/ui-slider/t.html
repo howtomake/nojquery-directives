@@ -1,7 +1,7 @@
-<div class="ui-slider ui-slider-horizontal">
-    <a class="ui-slider-handle" ng-style="{left: (current[0]-min)/len*100+'%'}"
+<div class="ui-slider ui-slider-horizontal" ng-click="sliderClick($event)">
+    <a class="ui-slider-handle min-ranger" ng-style="{left: (current[0]-min)/len*100+'%'}"
             ng-mousedown="mousedown($event,'startDown')"></a>
-    <a class="ui-slider-handle" ng-style="{left: (current[1]-min)/len*100+'%'}"
+    <a class="ui-slider-handle max-ranger" ng-style="{left: (current[1]-min)/len*100+'%'}"
             ng-mousedown="mousedown($event,'endDown')"></a>
     <div class="ui-slider-range" ng-style="{left: (current[0]-min)/len*100+'%',width:(current[1]-current[0])/len*100+'%'}"></div>
 </div>

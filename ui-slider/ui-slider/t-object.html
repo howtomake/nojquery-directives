@@ -1,4 +1,4 @@
-<div class="ui-slider ui-slider-horizontal">
+<div class="ui-slider ui-slider-horizontal" ng-click="sliderClick($event)">
     <a class="ui-slider-handle" ng-style="{left: (current.start-min)/len*100+'%'}"
        ng-mousedown="mousedown($event,'startDown')"></a>
     <a class="ui-slider-handle" ng-style="{left: (current.end-min)/len*100+'%'}"
